@@ -1,7 +1,9 @@
 import {CardContainer, ColumnContainer, ColumnTitle} from "./styles.ts";
+import React from "react";
 
 type ColumnProps = {
     text: string
+    children?: React.ReactNode
 }
 
 export const Column = ({text}: ColumnProps) => {
