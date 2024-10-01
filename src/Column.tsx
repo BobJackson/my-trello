@@ -3,6 +3,7 @@ import React from "react";
 import {Card} from "./Card.tsx";
 import {AddNewItem} from "./AddNewItem.tsx";
 import {useAppState} from "./state/AppStateContext.tsx";
+import {addTask} from "./state/actions.ts";
 
 type ColumnProps = {
     text: string
@@ -11,7 +12,7 @@ type ColumnProps = {
 }
 
 export const Column = ({text, id}: ColumnProps) => {
-    const {getTasksByListId} = useAppState()
+    const {getTasksByListId, dispatch} = useAppState()
 
     const tasks = getTasksByListId(id)
 
@@ -22,7 +23,7 @@ export const Column = ({text, id}: ColumnProps) => {
                 <Card key={task.id} text={task.text} id={task.id}/>
             ))}
             <AddNewItem
-                onAdd={console.log}
+                onAdd={(text) => dispatch(addTask(text, id))}
                 toggleButtonText="+ Add another card"
                 dark/>
         </ColumnContainer>
