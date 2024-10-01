@@ -7,6 +7,7 @@ import {addTask, moveList} from "./state/actions.ts";
 import {useDrop} from "react-dnd";
 import {throttle} from "throttle-debounce-ts";
 import {useItemDrag} from "./utils/useItemDrag.ts";
+import {isHidden} from "./utils/isHidden.ts";
 
 type ColumnProps = {
     text: string
@@ -41,7 +42,7 @@ export const Column = ({text, id}: ColumnProps) => {
     drag(drop(ref))
 
     return (
-        <ColumnContainer ref={ref}>
+        <ColumnContainer ref={ref} isHidden={isHidden(draggedItem, "COLUMN", id)}>
             <ColumnTitle>{text}</ColumnTitle>
             {tasks.map(task => (
                 <Card key={task.id} text={task.text} id={task.id}/>
