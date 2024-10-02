@@ -51,5 +51,8 @@ export const appStateReducer = (
             draft.draggedItem = action.payload
             break
         }
+        default: {
+            break
+        }
     }
 }

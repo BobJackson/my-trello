@@ -46,7 +46,7 @@ export const Column = ({text, id, isPreview}: ColumnProps) => {
         <ColumnContainer
             isPreview={isPreview}
             ref={ref}
-            isHidden={isHidden(draggedItem, "COLUMN", id)}
+            isHidden={isHidden(draggedItem, "COLUMN", id, isPreview)}
         >
             <ColumnTitle>{text}</ColumnTitle>
             {tasks.map(task => (

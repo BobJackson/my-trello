@@ -2,20 +2,20 @@ import {DragItem} from "../DragItem.tsx";
 
 export type Action =
     | {
-    type: "ADD_LIST",
+    type: "ADD_LIST"
     payload: string
 }
     | {
-    type: "ADD_TASK",
+    type: "ADD_TASK"
     payload: {
-        text: string,
+        text: string;
         listId: string
     }
 }
     | {
-    type: "MOVE_LIST",
+    type: "MOVE_LIST"
     payload: {
-        draggedId: string,
+        draggedId: string
         hoverId: string
     }
 }
