@@ -50,7 +50,7 @@ export const Column = ({text, id, isPreview}: ColumnProps) => {
         >
             <ColumnTitle>{text}</ColumnTitle>
             {tasks.map(task => (
-                <Card key={task.id} text={task.text} id={task.id}/>
+                <Card columnId={id} key={task.id} text={task.text} id={task.id}/>
             ))}
             <AddNewItem
                 onAdd={(text) => dispatch(addTask(text, id))}
