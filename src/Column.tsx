@@ -3,7 +3,7 @@ import React, {useRef} from "react";
 import {Card} from "./Card.tsx";
 import {AddNewItem} from "./AddNewItem.tsx";
 import {useAppState} from "./state/AppStateContext.tsx";
-import {addTask, moveList} from "./state/actions.ts";
+import {addTask, moveList, moveTask, setDraggedItem} from "./state/actions.ts";
 import {useDrop} from "react-dnd";
 import {throttle} from "throttle-debounce-ts";
 import {useItemDrag} from "./utils/useItemDrag.ts";
@@ -24,7 +24,7 @@ export const Column = ({text, id, isPreview}: ColumnProps) => {
 
     const ref = useRef<HTMLDivElement>(null)
     const [, drop] = useDrop({
-        accept: "COLUMN",
+        accept: ["COLUMN", "CARD"],
         hover: throttle(200, () => {
             if (!draggedItem) {
                 return
@@ -34,6 +34,15 @@ export const Column = ({text, id, isPreview}: ColumnProps) => {
                     return
                 }
                 dispatch(moveList(draggedItem.id, id))
+            } else {
+                if (draggedItem.columnId === id) {
+                    return
+                }
+                if (tasks.length) {
+                    return;
+                }
+                dispatch(moveTask(draggedItem.id, null, draggedItem.columnId, id))
+                dispatch(setDraggedItem({...draggedItem, columnId: id}))
             }
         })
     })
