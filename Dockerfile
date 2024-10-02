@@ -1,4 +1,4 @@
-FROM node:20 AS build
+FROM node:16 AS build
 # 容器内的目录，通常我们会使用 app 目录
 WORKDIR /app
 COPY . .
