@@ -19,6 +19,12 @@ export type AppState = {
     draggedItem: DragItem | null
 }
 
+export type CommonResponse<T> = {
+    data: T
+    success: boolean
+    message: string
+}
+
 
 export const appStateReducer = (
     draft: AppState,

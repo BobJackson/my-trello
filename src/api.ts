@@ -1,4 +1,4 @@
-import {AppState} from "./state/appStateReducer.ts";
+import {AppState, CommonResponse} from "./state/appStateReducer.ts";
 
 export const save = (payload: AppState) => {
     return fetch(`${process.env.REACT_APP_BACKEND_ENDPOINT}/save`, {
@@ -14,6 +14,8 @@ export const save = (payload: AppState) => {
         } else {
             throw new Error("Error while saving the state.")
         }
+    }).then((response) => {
+        return response.data
     })
 }
 
@@ -21,9 +23,11 @@ export const load = () => {
     return fetch(`${process.env.REACT_APP_BACKEND_ENDPOINT}/load`)
         .then((response) => {
             if (response.ok) {
-                return response.json() as Promise<AppState>
+                return response.json() as Promise<CommonResponse<AppState>>
             } else {
                 throw new Error("Error while loading the state.")
             }
+        }).then((response) => {
+            return response.data as AppState
         })
 }
