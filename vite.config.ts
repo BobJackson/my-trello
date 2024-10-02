@@ -9,10 +9,5 @@ export default defineConfig(({mode}) => {
       'process.env.REACT_APP_BACKEND_ENDPOINT': JSON.stringify(env.REACT_APP_BACKEND_ENDPOINT)
     },
     plugins: [react()],
-    build: {
-      rollupOptions: {
-        external: ['use-immer']
-      }
-    }
   }
 })
