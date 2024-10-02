@@ -12,10 +12,11 @@ import {isHidden} from "./utils/isHidden.ts";
 type ColumnProps = {
     text: string
     id: string
-    children?: React.ReactNode
+    children?: React.ReactNode,
+    isPreview?: boolean
 }
 
-export const Column = ({text, id}: ColumnProps) => {
+export const Column = ({text, id, isPreview}: ColumnProps) => {
     const {draggedItem, getTasksByListId, dispatch} = useAppState()
 
     const tasks = getTasksByListId(id)
@@ -42,7 +43,11 @@ export const Column = ({text, id}: ColumnProps) => {
     drag(drop(ref))
 
     return (
-        <ColumnContainer ref={ref} isHidden={isHidden(draggedItem, "COLUMN", id)}>
+        <ColumnContainer
+            isPreview={isPreview}
+            ref={ref}
+            isHidden={isHidden(draggedItem, "COLUMN", id)}
+        >
             <ColumnTitle>{text}</ColumnTitle>
             {tasks.map(task => (
                 <Card key={task.id} text={task.text} id={task.id}/>
